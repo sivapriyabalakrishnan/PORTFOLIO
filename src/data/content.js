@@ -114,9 +114,8 @@ export const certifications = [
 export const github = {
   heading: 'Code, in the open.',
   lead: 'My repositories, experiments and projects live on GitHub.',
-  // TODO: replace with your real GitHub profile URL and handle.
-  href: 'https://github.com/your-username',
-  label: 'github.com/your-username',
+  href: 'https://github.com/sivapriyabalakrishnan',
+  label: 'github.com/sivapriyabalakrishnan',
 }
 
 export const contact = {
