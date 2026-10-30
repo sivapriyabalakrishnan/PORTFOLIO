@@ -1,0 +1,95 @@
+/* Horizontal expandable panels (desktop) → stacked accordion (mobile) */
+.panels { display: flex; gap: 14px; height: clamp(500px, 62vh, 600px); }
+
+.panel {
+  position: relative; flex: 1 1 0; min-width: 0; overflow: hidden; border-radius: 26px;
+  border: 1px solid var(--glass-line);
+  background: linear-gradient(160deg, rgba(36, 27, 20, 0.78), rgba(14, 10, 8, 0.86));
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+  transition: flex-grow 0.95s var(--ease-io), border-color 0.6s, box-shadow 0.8s;
+}
+.panel:hover { border-color: rgba(227, 201, 160, 0.34); }
+.panel.is-open { flex-grow: 4.6; border-color: rgba(227, 201, 160, 0.38); box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.9); }
+.panel.is-dim { flex-grow: 0.32; min-width: 88px; }
+
+/* soft stripe glow inside each panel (echoes the page background) */
+.panel__glow {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.5; filter: blur(12px);
+  background: linear-gradient(90deg, transparent 0 8%, rgba(160, 127, 91, 0.5) 8% 16%, transparent 16% 26%, rgba(110, 82, 56, 0.55) 26% 36%,
+    transparent 36% 52%, rgba(160, 127, 91, 0.4) 52% 60%, transparent 60% 100%);
+  -webkit-mask-image: linear-gradient(200deg, #000, transparent 70%); mask-image: linear-gradient(200deg, #000, transparent 70%);
+  transition: opacity 0.9s;
+}
+.panel--1 .panel__glow { background: linear-gradient(90deg, transparent 0 14%, rgba(140, 110, 80, 0.5) 14% 24%, transparent 24% 40%, rgba(180, 145, 105, 0.45) 40% 47%, transparent 47% 70%, rgba(110, 82, 56, 0.55) 70% 82%, transparent 82%); }
+.panel.is-open .panel__glow { opacity: 0.75; }
+.panel.is-dim .panel__glow { opacity: 0.3; }
+
+/* Header / toggle */
+.panel__head { position: absolute; inset: 0; z-index: 2; font-size: inherit; letter-spacing: 0; pointer-events: none; }
+.panel__toggle {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: start; gap: 1.2rem; width: 100%;
+  padding: clamp(1.4rem, 2.6vw, 2.2rem); background: none; border: 0; text-align: left; cursor: pointer; pointer-events: auto;
+}
+/* collapsed: whole panel is clickable; open: only the header row */
+.panel:not(.is-open) .panel__toggle::after { content: ''; position: absolute; inset: 0; }
+.panel__num { font-size: 0.75rem; letter-spacing: 0.22em; color: var(--tan); padding-top: 0.5rem; }
+.panel__title { font-family: var(--serif); font-size: clamp(1.5rem, 2.6vw, 2.3rem); line-height: 1.1; transition: transform 0.9s var(--ease-io), opacity 0.5s; }
+.panel:not(.is-open):not(.is-dim) .panel__title { position: absolute; left: clamp(1.4rem, 2.6vw, 2.2rem); right: 4rem; bottom: clamp(1.6rem, 3vw, 2.4rem); font-size: clamp(1.7rem, 3vw, 2.6rem); }
+.panel__icon { position: relative; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--tan); transition: transform 0.8s var(--ease), background 0.5s; }
+.panel__icon::before, .panel__icon::after { content: ''; position: absolute; left: 50%; top: 50%; width: 12px; height: 1px; background: var(--tan-hi); transform: translate(-50%, -50%); }
+.panel__icon::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform 0.8s var(--ease); }
+.panel:not(.is-open):not(.is-dim) .panel__icon { position: absolute; right: clamp(1.4rem, 2.6vw, 2.2rem); bottom: clamp(1.6rem, 3vw, 2.4rem); }
+.panel__toggle:hover .panel__icon { background: rgba(227, 201, 160, 0.14); }
+.panel.is-open .panel__icon { transform: rotate(180deg); background: rgba(227, 201, 160, 0.16); }
+.panel.is-open .panel__icon::after { transform: translate(-50%, -50%) rotate(0); }
+
+/* Slim panels: show vertical title, hide the horizontal header content */
+.panel__vtitle {
+  position: absolute; left: 50%; bottom: 1.6rem; z-index: 1; white-space: nowrap; pointer-events: none;
+  writing-mode: vertical-rl; transform: translateX(-50%) rotate(180deg);
+  font-family: var(--serif); font-size: 1.25rem; color: var(--ink-soft); opacity: 0; transition: opacity 0.4s;
+}
+.panel.is-dim .panel__vtitle { opacity: 1; transition-delay: 0.55s; }
+.panel.is-dim .panel__title, .panel.is-dim .panel__icon { opacity: 0; }
+.panel.is-dim .panel__num { opacity: 1; }
+.panel.is-dim .panel__toggle { grid-template-columns: 1fr; justify-items: center; }
+.panel.is-dim .panel__title { position: absolute; width: 1px; height: 1px; overflow: hidden; }
+
+/* Body */
+.panel__body { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.panel.is-open .panel__body { pointer-events: auto; }
+.panel__clip { position: absolute; inset: 0; overflow: auto; overscroll-behavior: contain; padding-top: clamp(7.4rem, 11vw, 9rem); }
+.panel__content {
+  min-width: 540px; display: grid; grid-template-columns: 1fr 1.25fr; gap: 2rem clamp(2rem, 4vw, 3.5rem);
+  padding: 0 clamp(1.4rem, 2.6vw, 2.4rem) clamp(1.6rem, 3vw, 2.4rem);
+  opacity: 0; transform: translateY(14px); transition: opacity 0.4s, transform 0.4s;
+}
+.panel.is-open .panel__content { opacity: 1; transform: none; transition: opacity 0.8s 0.55s, transform 0.9s 0.55s var(--ease); }
+.panel__content h4 { font-size: 1.3rem; color: var(--tan-hi); margin-bottom: 0.8rem; }
+.panel__content p { color: var(--ink-soft); font-size: 0.97rem; margin-bottom: 1.8rem; }
+.chips--light li { font-size: 0.78rem; }
+.features li { position: relative; padding: 0 0 0.8rem 1.4rem; font-size: 0.92rem; line-height: 1.6; color: var(--ink-soft); }
+.features li::before { content: ''; position: absolute; left: 0; top: 0.8em; width: 8px; height: 1px; background: var(--tan-hi); }
+
+/* Mobile / small tablets: stacked accordion */
+@media (max-width: 860px) {
+  .panels { flex-direction: column; height: auto; gap: 12px; }
+  .panel, .panel.is-open, .panel.is-dim { flex: none; min-width: 0; }
+  .panel { display: grid; grid-template-rows: auto 0fr; transition: grid-template-rows 0.9s var(--ease-io), border-color 0.6s; }
+  .panel.is-open { grid-template-rows: auto 1fr; }
+  .panel__head, .panel__body { position: relative; inset: auto; }
+  .panel__head { pointer-events: auto; }
+  .panel__toggle { padding: 1.4rem 1.3rem; align-items: center; }
+  .panel__title,
+  .panel:not(.is-open):not(.is-dim) .panel__title,
+  .panel.is-dim .panel__title { position: static; width: auto; height: auto; overflow: visible; opacity: 1; font-size: clamp(1.35rem, 5.5vw, 1.8rem); }
+  .panel:not(.is-open):not(.is-dim) .panel__icon,
+  .panel.is-dim .panel__icon { position: relative; right: auto; bottom: auto; opacity: 1; }
+  .panel.is-dim .panel__toggle { grid-template-columns: auto 1fr auto; justify-items: stretch; }
+  .panel.is-dim .panel__vtitle, .panel__vtitle { display: none; }
+  .panel__num { padding-top: 0; }
+  .panel__body { overflow: hidden; min-height: 0; }
+  .panel__clip { position: static; overflow: hidden; min-height: 0; padding-top: 0; }
+  .panel__content { min-width: 0; grid-template-columns: 1fr; padding: 0.4rem 1.3rem 1.8rem; }
+  .panel.is-open .panel__content { transition: opacity 0.7s 0.3s, transform 0.8s 0.3s var(--ease); }
+}

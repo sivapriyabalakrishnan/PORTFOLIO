@@ -1,0 +1,23 @@
+:root {
+  --bg: #0d0a08;
+  --ink: #f1e8dc;
+  --ink-soft: #c2b4a3;
+  --ink-mute: #8f8272;
+  --tan: #c9a87c;
+  --tan-hi: #e3c9a0;
+  --umber: #7a5938;
+  --line: rgba(227, 201, 160, 0.22);
+  --glass: rgba(24, 18, 14, 0.55);
+  --glass-line: rgba(227, 201, 160, 0.16);
+
+  --serif: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+  --name-font: 'Anton', Impact, 'Arial Narrow Bold', 'Helvetica Neue', Arial, sans-serif;
+  --display: 'Inter Tight Variable', 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+  --sans: 'Manrope Variable', 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --ease: cubic-bezier(0.22, 0.7, 0.2, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.25, 1);
+  --pad-x: clamp(1.25rem, 6vw, 5rem);
+  --section-y: clamp(5rem, 11vw, 9rem);
+  --nav-h: 64px;
+}

@@ -1,0 +1,36 @@
+/* Atmospheric backdrop inspired by the reference: soft vertical light bands falling
+   from the upper-left into deep umber/black, with film grain. */
+.bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--bg); }
+
+.bg__bands {
+  position: absolute; inset: -6% -10%;
+  filter: blur(14px);
+  background: linear-gradient(90deg,
+    #a88562 0 5%, #3a2a1d 5% 9%, #c9a57c 9% 14%, #4a3724 14% 17%, #e0c096 17% 23%,
+    #2c2016 23% 26%, #b08c66 26% 31%, #4d3a27 31% 36%, #bf9b73 36% 40%, #2a1e15 40% 46%,
+    #8a6a49 46% 51%, #3b2b1d 51% 57%, #9a7852 57% 63%, #251a12 63% 70%, #4a3826 70% 78%,
+    #2a1e15 78% 86%, #3d2e20 86% 100%);
+}
+.bg__bands--a {
+  opacity: 1;
+  -webkit-mask-image: linear-gradient(112deg, #000 0%, rgba(0,0,0,0.85) 28%, rgba(0,0,0,0.35) 55%, transparent 78%);
+          mask-image: linear-gradient(112deg, #000 0%, rgba(0,0,0,0.85) 28%, rgba(0,0,0,0.35) 55%, transparent 78%);
+}
+.bg__bands--b {
+  opacity: 0.55;
+  transform: scaleX(-1);
+  -webkit-mask-image: linear-gradient(68deg, transparent 38%, rgba(0,0,0,0.5) 72%, #000 100%);
+          mask-image: linear-gradient(68deg, transparent 38%, rgba(0,0,0,0.5) 72%, #000 100%);
+}
+
+/* keeps text readable everywhere */
+.bg__scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(13, 10, 8, 0.1), rgba(13, 10, 8, 0.35));
+}
+.bg__grain {
+  position: absolute; inset: 0; opacity: 0.07;
+  background-image: url('../assets/grain.svg');
+  background-size: 220px 220px;
+}
