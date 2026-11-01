@@ -1,14 +1,25 @@
 :root {
-  --bg: #0d0a08;
-  --ink: #f1e8dc;
-  --ink-soft: #c2b4a3;
-  --ink-mute: #8f8272;
-  --tan: #c9a87c;
-  --tan-hi: #e3c9a0;
-  --umber: #7a5938;
-  --line: rgba(227, 201, 160, 0.22);
-  --glass: rgba(24, 18, 14, 0.55);
-  --glass-line: rgba(227, 201, 160, 0.16);
+  /* Palette sampled from the portrait: espresso browns, near-black, bronze/amber, ivory. */
+  --bg: #1f1511;            /* deep espresso: primary background */
+  --bg-deep: #130e0b;       /* near-black: nav, footer, darkest areas */
+  --umber: #8a5a34;         /* warm umber: gradients, separators */
+  --tan: #c79a63;           /* muted bronze: accents, eyebrows */
+  --tan-hi: #e2ba84;        /* soft amber: highlights, buttons */
+  --ink: #f4eadd;           /* warm ivory: headings and text */
+  --ink-soft: #cdbdad;      /* soft warm grey: secondary text */
+  --ink-mute: #9a8a7a;      /* tertiary text */
+
+  /* channel triplets so translucent surfaces use the same palette */
+  --bg-rgb: 31, 21, 17;
+  --bg-deep-rgb: 19, 14, 11;
+  --raised-rgb: 56, 39, 29;   /* cards / raised surfaces */
+  --accent-rgb: 199, 154, 99;
+  --accent-hi-rgb: 226, 186, 132;
+  --shadow-rgb: 12, 7, 4;
+
+  --line: rgba(var(--accent-hi-rgb), 0.22);
+  --glass: rgba(var(--raised-rgb), 0.5);
+  --glass-line: rgba(var(--accent-hi-rgb), 0.16);
 
   --serif: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
   --name-font: 'Anton', Impact, 'Arial Narrow Bold', 'Helvetica Neue', Arial, sans-serif;

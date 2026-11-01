@@ -4,11 +4,11 @@
   max-width: 940px; margin: 0 auto; padding: 0.7rem 1.5rem;
   display: flex; align-items: center; justify-content: space-between;
   border-radius: 999px; border: 1px solid var(--glass-line);
-  background: rgba(20, 14, 10, 0.35);
+  background: rgba(var(--bg-deep-rgb), 0.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2);
   transition: background 0.5s, box-shadow 0.5s;
 }
-.nav.is-scrolled .nav__inner { background: rgba(16, 11, 8, 0.72); box-shadow: 0 16px 44px -18px rgba(0, 0, 0, 0.7); }
+.nav.is-scrolled .nav__inner { background: rgba(var(--bg-deep-rgb), 0.78); box-shadow: 0 16px 44px -18px rgba(var(--shadow-rgb), 0.6); }
 .nav__logo {
   font-family: var(--name-font); font-weight: 400; text-transform: uppercase; font-size: 1.2rem; letter-spacing: 0.04em; line-height: 1.2; white-space: nowrap;
   color: transparent; user-select: none; -webkit-user-select: none; /* the travelling name is drawn on top */
@@ -34,9 +34,9 @@
   .nav__links {
     position: absolute; top: calc(100% + 10px); left: 0; right: 0;
     flex-direction: column; gap: 0; padding: 0.6rem 1.5rem; border-radius: 22px;
-    background: rgba(14, 10, 7, 0.98); border: 1px solid var(--glass-line);
+    background: rgba(var(--bg-deep-rgb), 0.98); border: 1px solid var(--glass-line);
     -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
-    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 24px 60px -20px rgba(var(--shadow-rgb), 0.7);
     opacity: 0; visibility: hidden; transform: translateY(-8px);
     transition: opacity 0.4s, transform 0.5s var(--ease), visibility 0s 0.5s;
   }

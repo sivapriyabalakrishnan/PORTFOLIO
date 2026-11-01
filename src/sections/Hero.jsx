@@ -1,6 +1,6 @@
 import { profile } from '../data/content'
 import NameWords from '../components/NameWords'
-import portrait from '../assets/portrait-cutout.webp'
+import portrait from '../assets/hero-portrait.jpg'
 
 export default function Hero() {
   const [roleA, roleB] = profile.roles
@@ -36,7 +36,7 @@ export default function Hero() {
         </div>
 
         <figure className="hero__portrait">
-          <img src={portrait} alt={`Portrait of ${profile.name}`} width="825" height="880" decoding="async" fetchPriority="high" />
+          <img src={portrait} alt={`Portrait of ${profile.name}`} width="1086" height="1448" decoding="async" fetchPriority="high" />
         </figure>
       </div>
     </section>

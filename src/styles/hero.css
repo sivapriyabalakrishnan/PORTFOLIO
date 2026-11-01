@@ -1,4 +1,4 @@
-.hero { min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: calc(var(--nav-h) + 1.6rem) 0 0; position: relative; overflow-x: clip; }
+.hero { min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: calc(var(--nav-h) + 1.2rem) 0 0; position: relative; overflow-x: clip; }
 .hero__inner {
   width: 100%; max-width: 1480px; margin: 0 auto; padding-inline: var(--pad-x);
   display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'lead portrait'; align-items: end;
@@ -41,26 +41,19 @@
 .hero__roles-sep { color: var(--umber); font-weight: 400; }
 .hero__roles-b { color: var(--tan-hi); }
 
-/* Portrait: greyscale cutout over a tan circle, standing on the bottom edge of the hero. */
+/* Portrait: the photograph is used untouched. Its edges are dissolved into the page with a
+   feathered mask (no frame, no shapes), and it stands on the bottom edge of the hero. */
 .hero__portrait {
-  grid-area: portrait; margin: 0 0 clamp(3rem, 12svh, 7.5rem); position: relative; z-index: 1; align-self: end;
-  width: min(36vw, 62svh, 36rem); aspect-ratio: 825 / 880;
+  grid-area: portrait; margin: 0; position: relative; z-index: 1; align-self: end;
+  width: min(42vw, 66svh, 40rem); aspect-ratio: 1086 / 1448;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 26%, #000 80%, transparent 100%), linear-gradient(180deg, transparent 0, #000 24%, #000 78%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 26%, #000 80%, transparent 100%), linear-gradient(180deg, transparent 0, #000 24%, #000 78%, transparent 100%);
+  -webkit-mask-composite: source-in; mask-composite: intersect;
   transform: translate3d(0, calc(var(--p, 0) * -48px), 0);
   opacity: calc(1 - var(--p, 0) * 0.45);
 }
-.hero__portrait::before {
-  content: ''; position: absolute; left: 10%; top: 5%; width: 80%; aspect-ratio: 1; border-radius: 50%;
-  background: radial-gradient(circle at 35% 28%, var(--tan-hi), var(--tan) 55%, var(--umber) 130%);
-  animation: circleIn 1.8s 0.15s var(--ease) both;
-}
-.hero__portrait img {
-  position: relative; display: block; width: 100%; height: 100%; object-fit: cover;
-  filter: contrast(1.05) brightness(0.96);
-  -webkit-mask-image: linear-gradient(#000 78%, transparent 100%); mask-image: linear-gradient(#000 78%, transparent 100%);
-  animation: portraitIn 2s 0.3s var(--ease) both;
-}
-@keyframes circleIn { from { opacity: 0; transform: scale(0.82); } to { opacity: 1; transform: none; } }
-@keyframes portraitIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.hero__portrait img { display: block; width: 100%; height: 100%; object-fit: cover; animation: portraitIn 2.2s 0.3s var(--ease) both; }
+@keyframes portraitIn { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
 
 /* Travelling name layer */
 .fname { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
@@ -76,7 +69,7 @@
   .hero__inner { grid-template-columns: 1fr; grid-template-areas: 'lead' 'portrait'; }
   .hero__name { font-size: clamp(3.2rem, 17vw, 8rem); }
   .hero__lead { padding-bottom: 1.5rem; }
-  .hero__portrait { width: min(88%, 26rem); justify-self: center; margin-bottom: 0; }
+  .hero__portrait { width: min(100%, 28rem); justify-self: center; margin-bottom: 0; }
   .hero__roles { font-size: clamp(1.25rem, 6vw, 1.9rem); }
 }
-@media (prefers-reduced-motion: reduce) { .fname.is-ready { animation: none; } .hero__portrait::before, .hero__portrait img { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .fname.is-ready { animation: none; } .hero__portrait img { animation: none; } }
