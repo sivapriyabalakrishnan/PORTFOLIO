@@ -59,7 +59,8 @@ export const skills = [
       'Ollama',
     ],
   },
-  { title: 'Developer Tools', items: ['Git', 'GitHub'] },
+  { title: 'Quality Assurance and Testing', items: ['pytest', 'Test Automation', 'Software Testing','API Testing','Error Handling'] },
+  { title: 'Developer and Data Tools', items: ['Git', 'GitHub','Vite','Microsoft Excel'] },
 ]
 
 export const projects = [
