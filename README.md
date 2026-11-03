@@ -4,6 +4,9 @@ A personal portfolio website for a **Software Developer** working with **Generat
 
 **Live site:** https://sivapriya-balakrishnan.vercel.app/
 
+<img width="1344" height="591" alt="image" src="https://github.com/user-attachments/assets/f16b6acb-2313-4315-84e4-be4e31d4958a" />
+
+
 
 ## Highlights
 
